@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../semantic/dist/semantic.min.css"
       ],
       "scripts": ["../node_modules/jquery/dist/jquery.min.js",
                   "../node_modules/semantic-ui/dist/semantic.min.js"],
