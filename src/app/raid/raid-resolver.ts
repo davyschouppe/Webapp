@@ -10,19 +10,6 @@ export class RaidResolver implements Resolve<Raid> {
  
   resolve(route: ActivatedRouteSnapshot, 
           state: RouterStateSnapshot): Observable<Raid> {
-    return this.raidDataService.getRaid(route.params['id'])
-    .map(raid => {
-      if(raid){
-        return raid;
-      }
-      console.log("notfound");
-      this.router.navigate(['/']);
-      return Observable.of(null);
-    })
-    .catch(error => {
-      console.log(`Retrieval error: ${error}`);
-      this.router.navigate(['/']);
-      return Observable.of(null);
-    });
+    return this.raidDataService.getRaid((route.params['id']));
   }
 }

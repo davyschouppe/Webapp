@@ -14,6 +14,7 @@ export class RaidListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._raids = new Array();
     this.updateRaids();
   }
 
@@ -23,6 +24,13 @@ export class RaidListComponent implements OnInit {
 
   updateRaids(){
     this._raidDataService.raids.subscribe(items => {this._raids = items;});
+  }
+
+  empty(){
+    if (this._raids) {
+      return this._raids.length === 0;
+    }
+    return true;
   }
 
 }

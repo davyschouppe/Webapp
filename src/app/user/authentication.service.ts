@@ -38,11 +38,7 @@ export class AuthenticationService {
         } else {
           return false;
         }
-      }).catch(e => {
-        if (e.status === 401) {
-            return Observable.throw('Unauthorized');
-        }
-    });
+      });
   }
 
   register(username: string, password: string, team: string): Observable<boolean> {

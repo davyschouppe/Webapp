@@ -1,5 +1,5 @@
-<div class="ui grid">
-    <div class="three wide column">
+<div class="ui two column stackable grid">
+    <div class="ui three wide column">
         <h1>{{raid.pokemon}} <h5>{{raid.created}}</h5></h1>
         <img class="ui small image" src={{raid.getImage()}}/>
         <h2>
@@ -21,7 +21,7 @@
             </button>
         </div>
     </div>
-    <div class="thirteen wide column">
+    <div class="ui thirteen wide column">
         <div class="ui header">Trainers: </div>
         <div class="ui grid segment">
             <app-player *ngFor="let player of raid.players" [player]="player"></app-player>

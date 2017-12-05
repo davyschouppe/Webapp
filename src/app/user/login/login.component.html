@@ -7,7 +7,7 @@
         <label for="password">password:</label>
         <input type="password" id="password" formControlName='password'>
     </div>
-    <div *ngIf='user.errors?.unauth' 
+    <div *ngIf="errMsg" 
     class='ui pointing red basic label'>
     Wrong username and/or password
     </div>

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   public user: FormGroup;
+  public errMsg: string;
 
   constructor(private fb: FormBuilder,private authenticationService : AuthenticationService,private router: Router) { }
 
@@ -33,11 +34,7 @@ export class LoginComponent implements OnInit {
           //this.router.navigate(['raid/list']);
         }
       }
-    }, err => {
-      if( err === "Unauthorized"){
-        this.user.setErrors({"unauth":"true"});
-      }
-    });
+    }, err => this.errMsg = err.json().message);
   }
   
 
