@@ -1,0 +1,18 @@
+<form class="ui large form segment" [formGroup]='tagForm' (ngSubmit)='onSubmit()'>
+    <label for="tag">add search tag:</label>
+    <div class="field">
+        <input type="text" id="tag" formControlName='tag'>
+    </div>
+    <div class='ui pointing red basic label' 
+    *ngIf='tagForm.errors?.double'>
+      that tag already exists
+  </div>
+  <button class="ui positive right button" type='submit' [disabled]=!tagForm.valid>add</button>
+</form>
+<div class="ui large header">Tags:</div>
+<div class="ui list" *ngFor="let tag of taglist">
+    <div class="ui item">
+        <div class="ui header large">{{tag}}</div>
+        <a class="small" (click)="delete(tag)">delete</a>
+    </div>
+</div>

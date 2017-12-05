@@ -1,0 +1,31 @@
+<div class="ui grid">
+    <div class="three wide column">
+        <h1>{{raid.pokemon}} <h5>{{raid.created}}</h5></h1>
+        <img class="ui small image" src={{raid.getImage()}}/>
+        <h2>
+        <p>
+            <small>Gym:</small>
+            <strong>{{raid.location}}</strong><br>
+            <small>Starts @</small> {{raid.getTime()}}</p>
+        </h2>
+        <div *ngIf='!joined()'>
+            <button (click)="join()"
+            class="ui positive bottom button">
+            Join Raid
+            </button>
+        </div>
+        <div *ngIf='joined()'>
+            <button (click)="leave()"
+            class="ui negative bottom button">
+            Leave Raid
+            </button>
+        </div>
+    </div>
+    <div class="thirteen wide column">
+        <div class="ui header">Trainers: </div>
+        <div class="ui grid segment">
+            <app-player *ngFor="let player of raid.players" [player]="player"></app-player>
+        </div>
+    </div>
+</div>
+

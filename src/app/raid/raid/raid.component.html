@@ -1,0 +1,18 @@
+<div routerLinkActive='active' routerLink="/raid/{{raid.id}}">
+    <h1>{{raid.pokemon}} <h5>{{raid.created}}</h5></h1>
+    <img class="ui small image" src={{raid.getImage()}}/>
+    <h2>
+    <p>
+        <small>Gym:</small>
+        <strong>{{raid.location}}</strong><br>
+        <small>Starts @</small> {{raid.getTime()}}</p>
+    </h2>
+    
+    Trainers: {{raid.players.length}} <i class="joined" *ngIf='joined()'>(Joined)</i>
+</div>
+<div *ngIf='isMine()'>
+    <button (click)="delete()" [disabled]=isDeleteDisabled
+    class="ui negative bottom button">
+    delete
+    </button>
+</div>

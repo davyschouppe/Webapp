@@ -1,0 +1,17 @@
+<form class="ui large form segment" [formGroup]='user' (ngSubmit)='onSubmit()'> 
+    <div class="field">
+        <label for="username">username:</label>
+        <input type="text" id="username" formControlName='username'>
+      </div>
+    <div class="field">
+        <label for="password">password:</label>
+        <input type="password" id="password" formControlName='password'>
+    </div>
+    <div *ngIf='user.errors?.unauth' 
+    class='ui pointing red basic label'>
+    Wrong username and/or password
+    </div>
+    <button type="submit" [disabled]=!user.valid class="ui positive right button">
+        Login
+    </button>
+</form>

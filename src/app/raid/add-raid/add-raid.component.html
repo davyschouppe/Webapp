@@ -1,0 +1,60 @@
+<form class="ui large form segment" [formGroup]='raidForm' (ngSubmit)='onSubmit()'> 
+    <h3 class="ui header">Add Raid Alert</h3>
+    <div class="field">
+    <label for="pokemon_id">Pokemon:</label> 
+    <div class="ui search">
+        <div class="ui icon input">
+          <input class="prompt" type="text" placeholder="Search pokemon..."  id='pokemon_id' formControlName='pokemon'>
+        </div>
+        <div class="results"></div>
+    </div>
+    </div>
+    <div *ngIf='raidForm.get("pokemon").errors?.required && raidForm.get("pokemon").touched' 
+      class='ui pointing red basic label'>
+      error! this is required
+    </div>
+    <div *ngIf='raidForm.get("pokemon").errors?.invalidchoice' 
+      class='ui pointing red basic label'>
+      error! this is not a valid pokemon, choose one from the list!
+    </div>
+    <div class="field">
+    <label for="location_id">Gym: <small data-tooltip="Add city name if not already present in gymname to improve search">(hint)</small></label> 
+    <input type='text' id='location_id' formControlName='location'>
+    </div>
+    <div *ngIf='raidForm.get("location").errors?.required && raidForm.get("location").touched' 
+    class='ui pointing red basic label'>
+    error! this is required
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label>Hour</label>
+        <input type='text' id='hour_id' formControlName='hour'>
+        <div *ngIf='raidForm.get("hour").errors?.required && raidForm.get("hour").touched' 
+        class='ui pointing red basic label'>
+          error! this is required
+        </div>
+        <div *ngIf='raidForm.get("hour").errors?.notanumber && raidForm.get("hour").touched' 
+        class='ui pointing red basic label'>
+          error! this is not a number
+        </div>
+      </div>
+      <div class="field">
+        <label>Min</label>
+        <input type='text' id='min_id' formControlName='min'>
+        <div *ngIf='raidForm.get("min").errors?.required && raidForm.get("min").touched' 
+        class='ui pointing red basic label'>
+          error! this is required
+        </div>
+        <div *ngIf='raidForm.get("min").errors?.notanumber && raidForm.get("min").touched' 
+        class='ui pointing red basic label'>
+          error! this is not a number
+        </div>
+      </div>
+      
+    </div>
+    
+    <button type="submit" [disabled]=!raidForm.valid
+    class="ui positive right button">
+    add Raid
+    </button>
+  </form>	

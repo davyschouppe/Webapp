@@ -1,0 +1,12 @@
+<div class="ui grid segment">
+    <div *ngIf='raids.length === 0'>
+        <div class = "ui header large">
+            No raids found! Try adding a location in the <a routerLinkActive='active' routerLink="/user/tags">My Locations</a> tab !
+        </div>
+        <div class="ui medium image">
+                <img src="https://data.whicdn.com/images/68563219/original.png">
+        </div>
+    </div>
+    <app-raid *ngFor="let localraid of raids" [raid]="localraid" (deleteRaid)="updateRaids($event)">
+    </app-raid>
+</div>
