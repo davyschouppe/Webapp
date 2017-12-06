@@ -122,10 +122,10 @@ router.post('/API/users/register', function(req, res, next){
   var user = new User();
   user.username = req.body.username;
   user.team = req.body.team;
-  user.setPassword(req.body.password)
+  user.setPassword(req.body.password);
   user.save(function (err){
       if(err){ return next(err); }
-      return res.json({token: user.generateJWT(), team: user.team})
+      return res.json({token: user.generateJWT(), team: user.team, id: user._id})
   });
 });
 
@@ -137,7 +137,7 @@ router.post('/API/users/login', function(req, res, next){
   passport.authenticate('local', function(err, user, info){
     if(err){ return next(err); }
     if(user){
-      return res.json({token: user.generateJWT(), team: user.team});
+      return res.json({token: user.generateJWT(), team: user.team, id: user._id});
     } else {
       return res.status(401).json(info);
     }
@@ -155,8 +155,8 @@ router.post('/API/users/checkusername', function(req, res, next) {
   });
 });
 
-router.param('user', function(req, res, next, name) {
-  let query = User.findOne({username : name});
+router.param('user', function(req, res, next, id) {
+  let query = User.findById(id);
   query.exec(function (err, user){
     if (err) { return next(err); }
     if (!user) { return next(new Error('not found ' + id)); }

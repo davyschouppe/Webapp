@@ -27,11 +27,19 @@ export class RaidComponent implements OnInit {
   }
 
   isMine(){
-    return this.raid.creator === JSON.parse(localStorage.getItem('currentUser')).username;
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if(currentUser){
+       return this.raid.creator === currentUser.username;
+    }
+    return false;
   }
 
   joined() : boolean{
-    const me = JSON.parse(localStorage.getItem('currentUser')).username;
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let me;
+    if(currentUser){
+      me =currentUser.username;
+    }
     let joined=false;
     this.raid.players.forEach(player => {
       if(player.name === me){

@@ -4,7 +4,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-//require('dotenv').config();
+require('dotenv').config();
 let passport = require('passport');
 
 require('./raidalertbackend/models/User');

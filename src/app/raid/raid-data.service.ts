@@ -30,8 +30,8 @@ export class RaidDataService {
     }
 
     get raids(): Observable<Raid[]> {
-      const name = JSON.parse(localStorage.getItem('currentUser')).username;
-      const theUrl = `${this._raidsUrl}${name}`;
+      const id = JSON.parse(localStorage.getItem('currentUser')).id;
+      const theUrl = `${this._raidsUrl}${id}`;
       return this.http.get(theUrl, { headers: new Headers({Authorization: `Bearer ${this.auth.token}`}) })
         .map(response => response.json().map(item => Raid.fromJSON(item))
       );
@@ -55,7 +55,7 @@ export class RaidDataService {
       const theUrl = `${this._raidUrl}${raid.id}/players`;
       let player = new Player(
         JSON.parse(localStorage.getItem('currentUser')).username,
-        Player.getTeam(JSON.parse(localStorage.getItem('currentUserTeam')).team)
+        Player.getTeam(JSON.parse(localStorage.getItem('currentUser')).team)
       );
       return this.http.post(theUrl,player, { headers: new Headers({Authorization: `Bearer ${this.auth.token}`}) })
         .map(res => res.json())
@@ -67,22 +67,22 @@ export class RaidDataService {
     }
 
     getTags() : Observable<string[]> {
-      const name = JSON.parse(localStorage.getItem('currentUser')).username;
-      const theUrl = `${this._userUrl}${name}/tags`;
+      const id = JSON.parse(localStorage.getItem('currentUser')).id;
+      const theUrl = `${this._userUrl}${id}/tags`;
       return this.http.get(theUrl, { headers: new Headers({Authorization: `Bearer ${this.auth.token}`})})
       .map(response => response.json());
     }
 
     addTag(tag: String) : Observable<string> {
-      const name = JSON.parse(localStorage.getItem('currentUser')).username;
-      const theUrl = `${this._userUrl}${name}/tags`;
+      const id = JSON.parse(localStorage.getItem('currentUser')).id;
+      const theUrl = `${this._userUrl}${id}/tags`;
       return this.http.post(theUrl, {tag: tag}, { headers: new Headers({Authorization: `Bearer ${this.auth.token}`}) })
       .map(res => res.json());
     }
 
     deleteTag(tag: String) : Observable<string>{
-      const name = JSON.parse(localStorage.getItem('currentUser')).username;
-      const theUrl = `${this._userUrl}${name}/tags`;
+      const id = JSON.parse(localStorage.getItem('currentUser')).id;
+      const theUrl = `${this._userUrl}${id}/tags`;
       return this.http.put(theUrl, {tag: tag}, { headers: new Headers({Authorization: `Bearer ${this.auth.token}`}) })
       .map(res => res.json());
     }

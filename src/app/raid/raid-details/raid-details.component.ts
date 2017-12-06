@@ -36,7 +36,9 @@ export class RaidDetailsComponent implements OnInit {
     }
 
     joined() : boolean{
-      const me = JSON.parse(localStorage.getItem('currentUser')).username;
+      const currentUser =  JSON.parse(localStorage.getItem('currentUser'));
+      if(!currentUser) return false;
+      const me =currentUser.username;
       let joined=false;
       this.raid.players.forEach(player => {
         if(player.name === me){

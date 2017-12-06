@@ -44,7 +44,10 @@ export class AddRaidComponent implements OnInit {
     let r = new Raid(AddRaidComponent.autoCompleteName.toString(),this.raidForm.value.location,this.raidForm.value.hour,this.raidForm.value.min);
     AddRaidComponent.autoCompleteName = undefined;
     r.ndex = this.getndex(r.pokemon);
-    r.creator = JSON.parse(localStorage.getItem('currentUser')).username;
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if(currentUser){
+      r.creator = currentUser.username;
+    }
     this._raidsDataService.addRaid(r).subscribe((res) =>this.join(res));
     }
     else{
