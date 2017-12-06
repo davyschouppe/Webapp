@@ -9,12 +9,13 @@ import { RaidDataService } from '../raid-data.service';
 })
 export class RaidListComponent implements OnInit {
   private _raids: Raid[];
+  private loading: boolean;
   
   constructor(private _raidDataService: RaidDataService) {
+    this.loading=true;
   }
 
   ngOnInit() {
-    this._raids = new Array();
     this.updateRaids();
   }
 
@@ -23,12 +24,16 @@ export class RaidListComponent implements OnInit {
   }
 
   updateRaids(){
-    this._raidDataService.raids.subscribe(items => {this._raids = items;});
+    this.loading=true;
+    this._raidDataService.raids.subscribe(items => {this._raids = items;this.loading=false;});
   }
 
   empty(){
     if (this._raids) {
       return this._raids.length === 0;
+    }
+    if(this.loading){
+      return false;
     }
     return true;
   }

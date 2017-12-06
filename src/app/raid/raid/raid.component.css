@@ -1,3 +1,27 @@
 .joined {
     color: green;
 }
+
+ #raidcard{
+    height: 450px;
+    margin: 20px;
+ }
+ 
+ 
+ #header {
+    height: 70px;
+ }
+ 
+ #raidcontent{
+    height: 200px;
+ }
+
+ #extracontent{
+    height: 50px;
+ }
+
+ #pokemonimg{
+    height: 200px;
+    width: 100%;
+    object-fit: scale-down;
+ }

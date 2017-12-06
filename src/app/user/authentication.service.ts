@@ -29,7 +29,7 @@ export class AuthenticationService {
         const token = res.token;
         if (token) {
           localStorage.setItem('currentUser', 
-            JSON.stringify({ username: username, token: token , team: res.team, id: res.id }));
+            JSON.stringify({ username: username.toLowerCase(), token: token , team: res.team, id: res.id }));
           this._user$.next(username);
           return true;
         } else {
@@ -45,7 +45,7 @@ export class AuthenticationService {
         const token = res.token;
         if (token) {
           localStorage.setItem('currentUser', 
-            JSON.stringify({ username: username, token: res.token, team: res.team, id: res.id }));
+            JSON.stringify({ username: username.toLowerCase(), token: res.token, team: res.team, id: res.id }));
           this._user$.next(username);
           return true;
         } else {

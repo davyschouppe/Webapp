@@ -7,6 +7,8 @@
                 <img src="https://data.whicdn.com/images/68563219/original.png">
         </div>
     </div>
+    <div class="ui link centered cards">
     <app-raid *ngFor="let localraid of raids" [raid]="localraid" (deleteRaid)="updateRaids($event)">
     </app-raid>
+    </div>
 </div>

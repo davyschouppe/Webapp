@@ -29,7 +29,7 @@ export class RaidComponent implements OnInit {
   isMine(){
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if(currentUser){
-       return this.raid.creator === currentUser.username;
+       return this.raid.creator.toLowerCase() === currentUser.username;
     }
     return false;
   }

@@ -48,7 +48,7 @@ export class AddRaidComponent implements OnInit {
     if(currentUser){
       r.creator = currentUser.username;
     }
-    this._raidsDataService.addRaid(r).subscribe((res) =>this.join(res));
+    this._raidsDataService.addRaid(r).subscribe((res) => this.join(res));
     }
     else{
       this.raidForm.get("pokemon").setErrors({"invalidchoice":"true"});
