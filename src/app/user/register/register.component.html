@@ -6,7 +6,11 @@
   <div class='ui pointing red basic label' 
     *ngIf='user.get("username").errors?.required && user.get("username").touched'>
       error! this is required
-  </div>  
+  </div>
+  <div class='ui pointing red basic label' 
+    *ngIf='user.get("username").errors?.minlength && user.get("username").touched'>
+      error! username needs to be alteast 2 characters long!
+  </div>    
   <div class='ui pointing red basic label' 
     *ngIf='user.get("username").errors?.userAlreadyExists && user.get("username").touched'>
       a user with that name already exists
@@ -15,6 +19,10 @@
     <label for="password">password:</label>
     <input type="password" id="password"  formControlName="password">
   </div>
+  <div class='ui pointing red basic label' 
+  *ngIf='user.get("passwordGroup").get("password").errors?.minlength && user.get("passwordGroup").get("password").touched'>
+    error! password needs to be alteast 12 characters long!
+   </div>
   <div class="field" formGroupName="passwordGroup">
     <label for="confirmPassword">confirm password:</label>
     <input type="password" id="confirmPassword" formControlName='confirmPassword'>

@@ -59,7 +59,7 @@ export class RaidDataService {
       );
       return this.http.post(theUrl,player, { headers: new Headers({Authorization: `Bearer ${this.auth.token}`}) })
         .map(res => res.json())
-        .map(item => Player.fromJSON(item));
+        .map(items => Player.fromJSON(items.player));
     }
 
     leave(id : string) {

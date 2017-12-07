@@ -1,27 +1,9 @@
-<!--<div routerLinkActive='active' routerLink="/raid/{{raid.id}}">
-    <h1>{{raid.pokemon}} <h5>{{raid.created}}</h5></h1>
-    <img src={{raid.getImage()}}/>
-    <h2>
-    <p>
-        <small>Gym:</small>
-        <strong>{{raid.location}}</strong><br>
-        <small>Starts @</small> {{raid.getTime()}}</p>
-    </h2>
-    
-    Trainers: {{raid.players.length}} <i class="joined" *ngIf='joined()'>(Joined)</i>
-</div>
-<div *ngIf='isMine()'>
-    <button (click)="delete()" [disabled]=isDeleteDisabled
-    class="ui negative bottom button">
-    delete
-    </button>
-</div> -->
 <div class="ui card"  id="raidcard">
-        <div class="ui image" routerLinkActive='active' routerLink="/raid/{{raid.id}}">
+        <div class="ui image" routerLinkActive='active' routerLink="/raid/{{raid?.id}}">
             <img src={{raid.getImage()}} id="pokemonimg">
         </div>
         <div class="content" id="raidcontent">
-        <div id="header"  routerLinkActive='active' routerLink="/raid/{{raid.id}}">
+        <div id="header"  routerLinkActive='active' routerLink="/raid/{{raid?.id}}">
           <a class="header"><h1>{{raid.pokemon}} <h5>{{raid.created}}</h5></h1></a>
           <div class="meta">
             <span class="date"><i class="joined" *ngIf='joined()'>(Joined)</i></span>
@@ -30,9 +12,10 @@
           <div class="description">
                 <h2>
                     <p>
-                        <small>Gym:</small>
-                        <strong>{{raid.location}}</strong><br>
-                        <small>Starts @</small> {{raid.getTime()}}</p>
+                      <span id="nobr"><small>Gym:</small>
+                      <strong>{{raid.location}}</strong></span>
+                        <br>
+                      <small>Starts @</small> {{raid.getTime()}}</p>
                 </h2>
           </div>
           <div *ngIf='isMine()'>
@@ -42,7 +25,7 @@
                 </button>
             </div>
         </div>
-        <div class="extra content" id="extracontent"  routerLinkActive='active' routerLink="/raid/{{raid.id}}">
+        <div class="extra content" id="extracontent"  routerLinkActive='active' routerLink="/raid/{{raid?.id}}">
           <a>
             <i class="user icon"></i>
             Trainers: {{raid.players.length}}

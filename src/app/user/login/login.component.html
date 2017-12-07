@@ -3,10 +3,18 @@
         <label for="username">username:</label>
         <input type="text" id="username" formControlName='username'>
       </div>
+      <div class='ui pointing red basic label' 
+      *ngIf='user.get("username").errors?.minlength && user.get("username").touched'>
+        error! username needs to be alteast 2 characters long!
+    </div>
     <div class="field">
         <label for="password">password:</label>
         <input type="password" id="password" formControlName='password'>
     </div>
+    <div class='ui pointing red basic label' 
+    *ngIf='user.get("password").errors?.minlength && user.get("password").touched'>
+      error! password needs to be alteast 12 characters long!
+     </div>
     <div *ngIf="errMsg" 
     class='ui pointing red basic label'>
     Wrong username and/or password

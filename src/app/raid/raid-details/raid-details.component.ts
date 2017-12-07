@@ -31,7 +31,7 @@ export class RaidDetailsComponent implements OnInit {
     }
 
     join() : boolean {
-      this.raidDataService.join(this._raid).subscribe(player => this.raid.players.push(player));
+      this.raidDataService.join(this._raid).subscribe(player => {this.raid.players.push(player);});
       return false;
     }
 

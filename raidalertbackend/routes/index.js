@@ -19,6 +19,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/API/raids/:user', auth,function(req, res, next) {
+  if(!(req.payload._id === req.user._id.toString())){
+    return next(new Error('Users don\'t match!'));
+  }
   let tags = req.user.tags;
   let query = Raid.find().sort({created_at: -1}).populate('players');
   query.exec((err, raids) => {
@@ -39,7 +42,6 @@ router.get('/API/raids/:user', auth,function(req, res, next) {
       }
       res.json(filtered);
     }
-    /**/   
   })
 });
 
@@ -72,13 +74,18 @@ router.get('/API/raid/:raid', auth,function(req, res) {
   res.json(req.raid);
 });
 
-router.delete('/API/raid/:raid', auth,function(req, res, next) {
+router.delete('/API/raid/:raid', auth, function(req, res, next) {
+  if(!req.payload.username === req.raid.creator){
+    return next(new Error('Raid not owned by requesting User'));
+  }
   Player.remove({ _id: {$in: req.raid.players }}, 
     function (err) {
       if (err) return next(err);
-      req.raid.remove(function(err) {
-        if (err) { return next(err); }   
-        res.json(req.raid);
+      req.raid.remove(function(err,raid) {
+        if (err) { return next(err); }
+        Player.count({}, function( err, count){
+          res.status(200).json({msg : "removed" , count: count});
+        });
       });
   })
 });
@@ -90,9 +97,9 @@ router.post('/API/raid/:raid/players', auth,function(req, res, next) {
     if (err) return next(err);
 
     req.raid.players.push(player);
-    req.raid.save(function(err, rec) {
+    req.raid.save(function(err, raid) {
       if (err) return next(err);
-      res.json(player);
+      res.json({raidId: raid._id, player});
     })
   });
 });
@@ -166,10 +173,16 @@ router.param('user', function(req, res, next, id) {
 });
 
 router.get('/API/user/:user/tags', auth, function(req, res, next) {
+  if(!(req.payload._id === req.user._id.toString())){
+    return next(new Error('Users don\'t match!'));
+  }
   res.json(req.user.tags);
 });
 
 router.post('/API/user/:user/tags', auth, function(req, res, next) {
+  if(!(req.payload._id === req.user._id.toString())){
+    return next(new Error('Users don\'t match!'));
+  }
   req.user.tags.push(req.body.tag);
   req.user.save(function(err, user) {
     if (err) return next(err);
@@ -178,6 +191,9 @@ router.post('/API/user/:user/tags', auth, function(req, res, next) {
 });
 
 router.put('/API/user/:user/tags', auth, function(req, res, next) {
+  if(!(req.payload._id === req.user._id.toString())){
+    return next(new Error('Users don\'t match!'));
+  }
   let tag = req.body.tag;
   req.user.tags.splice(req.user.tags.indexOf(tag),1);
   req.user.save(function(err, user) {
