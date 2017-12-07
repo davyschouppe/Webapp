@@ -20,7 +20,7 @@
     <input type="password" id="password"  formControlName="password">
   </div>
   <div class='ui pointing red basic label' 
-  *ngIf='user.get("passwordGroup").get("password").errors?.minlength && user.get("passwordGroup").get("password").touched'>
+  *ngIf='user.get("passwordGroup.password").errors?.passwordTooShort && user.get("passwordGroup").touched'>
     error! password needs to be alteast 12 characters long!
    </div>
   <div class="field" formGroupName="passwordGroup">
